@@ -21,6 +21,8 @@ sleep 5
 
 #!/bin/bash
 
+#!/bin/bash
+
 # Log file name
 LOGFILE="script.log"
 
@@ -123,19 +125,35 @@ rzup --version
 
 echo_log "🔧 Adding Cargo to PATH..."
 export PATH="$HOME/.cargo/bin:$PATH"
-source "$HOME/.cargo/env"
-
-echo_log "💾 Saving PATH configuration to .bashrc..."
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
-echo_log "🦀 Installing Rust..."
+echo_log "🦀 Installing Rust and Rustup..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-echo_log "🔄 Loading Cargo environment after Rust installation..."
+echo_log "🔄 Loading Cargo environment..."
 source "$HOME/.cargo/env"
 
+echo_log "🔧 Ensuring Cargo and Rustup are in PATH..."
+export PATH="$HOME/.cargo/bin:$PATH"
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+echo_log "✅ Verifying Rustup installation..."
+if command -v rustup &> /dev/null; then
+    rustup --version
+    echo_log "🎉 Rustup installed successfully!"
+else
+    echo_log "❌ Rustup installation failed. Please check manually."
+fi
+
 echo_log "✅ Verifying Rust installation..."
-rustc --version
+if command -v rustc &> /dev/null; then
+    rustc --version
+    echo_log "🎉 Rust installed successfully!"
+else
+    echo_log "❌ Rust installation failed. Please check manually."
+fi
 
 echo_log "🎉 All processes completed at $(date '+%H:%M:%S')! System is ready to use! 🚀"
+
