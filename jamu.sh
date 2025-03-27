@@ -110,50 +110,28 @@ sudo apt install -y golang-go
 echo_log "✅ Verifying Go installation..."
 go version
 
-echo_log "🔗 Installing RISC Zero..."
-curl -L https://risczero.com/install | bash
+echo_log "🔗 Installing RUST..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustc --version
 
-echo_log "🔄 Loading Cargo environment..."
+curl -L https://risczero.com/install | bash
 source "$HOME/.cargo/env"
 
-echo_log "⚙️ Installing RZup..."
-rzup install
+source "/root/.bashrc"
 
 echo_log "✅ Verifying RZup installation..."
-which rzup
-rzup --version
-
-echo_log "🔧 Adding Cargo to PATH..."
+rzup install
 export PATH="$HOME/.cargo/bin:$PATH"
-echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
-echo_log "🦀 Installing Rust and Rustup..."
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-echo_log "🔄 Loading Cargo environment..."
 source "$HOME/.cargo/env"
 
-echo_log "🔧 Ensuring Cargo and Rustup are in PATH..."
-export PATH="$HOME/.cargo/bin:$PATH"
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
+rzup --version
 
-echo_log "✅ Verifying Rustup installation..."
-if command -v rustup &> /dev/null; then
-    rustup --version
-    echo_log "🎉 Rustup installed successfully!"
-else
-    echo_log "❌ Rustup installation failed. Please check manually."
-fi
-
-echo_log "✅ Verifying Rust installation..."
-if command -v rustc &> /dev/null; then
-    rustc --version
-    echo_log "🎉 Rust installed successfully!"
-else
-    echo_log "❌ Rust installation failed. Please check manually."
-fi
+echo_log "✅ Installing Seq..."
+apt install -y coreutils
+seq --version
 
 echo_log "🎉 All processes completed at $(date '+%H:%M:%S')! System is ready to use! 🚀"
 
