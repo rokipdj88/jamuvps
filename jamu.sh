@@ -133,5 +133,10 @@ echo_log "✅ Installing Seq..."
 apt install -y coreutils
 seq --version
 
+echo_log "✅ Installing Jq..."
+apt install jq
+
+echo_log "✅ Installing Bc..."
+apt install bc
 echo_log "🎉 All processes completed at $(date '+%H:%M:%S')! System is ready to use! 🚀"
 
