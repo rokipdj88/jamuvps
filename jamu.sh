@@ -138,5 +138,8 @@ apt install jq
 
 echo_log "✅ Installing Bc..."
 apt install bc
+
+echo_log "✅ Installing Htop..."
+apt install htop
 echo_log "🎉 All processes completed at $(date '+%H:%M:%S')! System is ready to use! 🚀"
 
