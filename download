@@ -10,12 +10,23 @@ ORANGE='\033[1;33m'
 RED='\033[1;31m'
 NC='\033[0m'  # No Color
 
-# Release-specific download URLs (populated by CI)
-LINUX_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/v0.10.1/nexus-network-linux-x86_64"
-LINUX_ARM64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/v0.10.1/nexus-network-linux-arm64"
-MACOS_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/v0.10.1/nexus-network-macos-x86_64"
-MACOS_ARM64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/v0.10.1/nexus-network-macos-arm64"
-WINDOWS_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/v0.10.1/nexus-network-windows-x86_64.exe"
+# Jika argumen kosong, minta input
+if [ -z "$1" ]; then
+    read -p "Masukkan versi Nexus CLI (contoh: v0.10.1): " VERSION
+else
+    VERSION="$1"
+fi
+
+# Kalau user tidak isi, set default
+if [ -z "$VERSION" ]; then
+    VERSION="v0.10.5"
+fi
+
+LINUX_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-linux-x86_64"
+LINUX_ARM64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-linux-arm64"
+MACOS_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-macos-x86_64"
+MACOS_ARM64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-macos-arm64"
+WINDOWS_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-windows-x86_64.exe"
 
 # Ensure the $NEXUS_HOME and $BIN_DIR directories exist.
 [ -d "$NEXUS_HOME" ] || mkdir -p "$NEXUS_HOME"
