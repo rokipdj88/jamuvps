@@ -26,12 +26,6 @@ NC='\033[0m'
 # -----------------------------------------------------------------------------
 # 2) Define environment variables and colors for terminal output.
 # -----------------------------------------------------------------------------
-NEXUS_HOME="$HOME/.nexus"
-BIN_DIR="$NEXUS_HOME/bin"
-GREEN='\033[1;32m'
-ORANGE='\033[1;33m'
-RED='\033[1;31m'
-NC='\033[0m'  # No Color
 
 # Release-specific download URLs
 LINUX_X86_64_URL="https://github.com/nexus-xyz/nexus-cli/releases/download/${VERSION}/nexus-network-linux-x86_64"
